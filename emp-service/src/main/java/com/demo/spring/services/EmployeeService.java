@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.demo.spring.entities.Employee;
+import com.demo.spring.exceptions.EmployeeExistsException;
 import com.demo.spring.exceptions.EmployeeNotFoundException;
 import com.demo.spring.repositories.EmployeeRepository;
 import com.demo.spring.util.EmpList;
@@ -32,5 +33,16 @@ public class EmployeeService {
 		return new EmployeeDTO(emp.getEmpId(), emp.getName(), emp.getCity(), emp.getSalary());
 	}
 	
-	
+	public EmployeeDTO save(EmployeeDTO empDto) {
+		
+		if(employeeRepository.existsById(empDto.getEmpId())) {
+			throw new EmployeeExistsException("Employee Exists..");
+		}else {
+			Employee emp=employeeRepository.save(new Employee(empDto.getEmpId(), empDto.getName(), empDto.getCity(), empDto.getSalary()));
+			return new EmployeeDTO(emp.getEmpId(), emp.getName(), emp.getCity(), emp.getSalary());
+		}
+			
+			
+			
+	}
 }
