@@ -1,0 +1,33 @@
+package com.demo.spring.controllers;
+
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.demo.spring.services.EmployeeService;
+import com.demo.spring.util.EmpList;
+import com.demo.spring.util.EmployeeDTO;
+
+@RestController
+@RequestMapping("/emp")
+public class EmployeeController {
+
+	private EmployeeService employeeService;
+
+	public EmployeeController(EmployeeService employeeService) {
+		this.employeeService = employeeService;
+	}
+
+	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	public ResponseEntity<EmpList> getempList() {
+		return ResponseEntity.ok(employeeService.getEmplList());
+	}
+
+	@GetMapping(path = "/{empId}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	public ResponseEntity<EmployeeDTO> getEmpById(@PathVariable("empId") Integer id) {
+		return ResponseEntity.ok(employeeService.findEmpById(id));
+	}
+}

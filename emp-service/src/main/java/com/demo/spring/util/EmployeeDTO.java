@@ -1,32 +1,25 @@
-package com.demo.spring.entities;
+package com.demo.spring.util;
 
-import java.util.Objects;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+@XmlRootElement(name="employee")
+public class EmployeeDTO {
 
-@Entity
-@Table(name="EMP")
-public class Employee {
-
-	@Id
-	@Column(name="EMPNO")
+	
 	private Integer empId;
 	
 	private String name;
 	
-	@Column(name="ADDRESS")
+	
 	private String city;
 	
 	private double salary;
 	
-	public Employee() {
+	public EmployeeDTO() {
 		
 	}
 
-	public Employee(Integer empId, String name, String city, double salary) {
+	public EmployeeDTO(Integer empId, String name, String city, double salary) {
 		this.empId = empId;
 		this.name = name;
 		this.city = city;
@@ -65,23 +58,7 @@ public class Employee {
 		this.salary = salary;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(empId);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Employee other = (Employee) obj;
-		return Objects.equals(empId, other.empId);
-	}
-
+	
 	@Override
 	public String toString() {
 		return "Employee [empId=" + empId + ", name=" + name + ", city=" + city + ", salary=" + salary + "]";

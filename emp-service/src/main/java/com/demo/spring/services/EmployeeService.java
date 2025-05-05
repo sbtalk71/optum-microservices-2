@@ -1,0 +1,36 @@
+package com.demo.spring.services;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
+import com.demo.spring.entities.Employee;
+import com.demo.spring.exceptions.EmployeeNotFoundException;
+import com.demo.spring.repositories.EmployeeRepository;
+import com.demo.spring.util.EmpList;
+import com.demo.spring.util.EmployeeDTO;
+
+@Service
+public class EmployeeService {
+
+	private EmployeeRepository employeeRepository;
+
+	
+	public EmployeeService(EmployeeRepository employeeRepository) {
+		this.employeeRepository = employeeRepository;
+	}
+
+	public EmpList getEmplList() {
+		List<EmployeeDTO> theList=employeeRepository.findAll().stream()
+				.map(emp->new EmployeeDTO(emp.getEmpId(), emp.getName(), emp.getCity(), emp.getSalary())).collect(Collectors.toList());
+		return new EmpList(theList);
+	}
+	
+	public EmployeeDTO findEmpById(Integer id) {
+		Employee emp= this.employeeRepository.findById(id).orElseThrow(()->new EmployeeNotFoundException("Emp not found.."));
+		return new EmployeeDTO(emp.getEmpId(), emp.getName(), emp.getCity(), emp.getSalary());
+	}
+	
+	
+}
