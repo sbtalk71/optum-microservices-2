@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,7 +30,8 @@ public class EmployeeController {
 	}
 
 	@GetMapping(path = "/{empId}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<EmployeeDTO> getEmpById(@PathVariable("empId") Integer id) {
+	public ResponseEntity<EmployeeDTO> getEmpById(@PathVariable("empId") Integer id,@RequestHeader(required = false) String myname) {
+		System.out.println("The Request header "+myname);
 		return ResponseEntity.ok(employeeService.findEmpById(id));
 	}
 	
