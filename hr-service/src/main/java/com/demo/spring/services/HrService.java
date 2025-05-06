@@ -18,7 +18,7 @@ public class HrService {
 	public String getEmpDetails(int id) {
 		return clientBuilder.build()
 				.get().
-				uri("http://localhost:8080/emp/"+id)
+				uri("http://emp-service/emp/"+id)
 				.accept(MediaType.APPLICATION_JSON)
 				.retrieve()
 				.body(String.class);
