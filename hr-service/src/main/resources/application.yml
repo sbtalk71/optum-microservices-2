@@ -1,3 +1,21 @@
+spring:
+ cloud:
+  loadbalancer:
+   cache:
+    ttl: 10
+
+resilience4j.circuitbreaker:
+ instances:
+    emp-service-backend:
+     registerHealthIndicator: true
+     slidingWindowSize: 10
+     permittedNumberOfCallsInHalfOpenState: 3
+     slidingWindowType: COUNT_BASED
+     minimumNumberOfCalls: 5
+     waitDurationInOpenState: 5s
+     failureRateThreshold: 33.3
+     automaticTransitionFromOpenToHalfOpenEnabled: true
+
 management:
   endpoints:
     web:
@@ -6,7 +24,9 @@ management:
   endpoint:
     health:
       show-details: always
-
+  health:
+    circuitbreakers:
+      enabled: true
 eureka:
  client:
   register-with-eureka: true
