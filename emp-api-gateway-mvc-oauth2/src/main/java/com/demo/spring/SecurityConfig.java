@@ -20,10 +20,8 @@ public class SecurityConfig {
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.csrf(csrf -> csrf.disable());
-		http.authorizeHttpRequests(auth->auth.requestMatchers("/hr/**").hasRole("ADMIN")
-				.requestMatchers("/emp/**").hasRole("USER")
-				.anyRequest().permitAll());
-	
+		http.authorizeHttpRequests(auth->auth.requestMatchers("/").permitAll().anyRequest().authenticated());
+		http.oauth2Login(Customizer.withDefaults()).logout(logout->logout.logoutSuccessUrl("/"));
 		return http.build();
 	}
 	
