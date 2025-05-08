@@ -12,6 +12,8 @@ import com.demo.spring.repositories.EmployeeRepository;
 import com.demo.spring.util.EmpList;
 import com.demo.spring.util.EmployeeDTO;
 
+import io.micrometer.observation.annotation.Observed;
+
 @Service
 public class EmployeeService {
 
@@ -22,17 +24,19 @@ public class EmployeeService {
 		this.employeeRepository = employeeRepository;
 	}
 
+	@Observed(name = "emp.list")
 	public EmpList getEmplList() {
 		List<EmployeeDTO> theList=employeeRepository.findAll().stream()
 				.map(emp->new EmployeeDTO(emp.getEmpId(), emp.getName(), emp.getCity(), emp.getSalary())).collect(Collectors.toList());
 		return new EmpList(theList);
 	}
-	
+	@Observed(name = "emp.find.one")
 	public EmployeeDTO findEmpById(Integer id) {
 		Employee emp= this.employeeRepository.findById(id).orElseThrow(()->new EmployeeNotFoundException("Emp not found.."));
 		return new EmployeeDTO(emp.getEmpId(), emp.getName(), emp.getCity(), emp.getSalary());
 	}
 	
+	@Observed(name = "emp.store.one")
 	public EmployeeDTO save(EmployeeDTO empDto) {
 		
 		if(employeeRepository.existsById(empDto.getEmpId())) {

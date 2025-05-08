@@ -11,6 +11,7 @@ import com.demo.spring.feign.client.EmpClient;
 import com.demo.spring.util.ResponseMessage;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.micrometer.observation.annotation.Observed;
 
 @Service
 public class HrService {
@@ -24,7 +25,7 @@ public class HrService {
 	}
 
 	
-	
+	@Observed(name="hr.emp.details")
 	@CircuitBreaker(name = "emp-service-backend", fallbackMethod = "fallbackGetEmpDetails")
 	public String getEmpDetails(int id) {
 		return clientBuilder.build().get().uri("http://emp-service/emp/" + id).accept(MediaType.APPLICATION_JSON)
