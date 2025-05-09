@@ -1,7 +1,7 @@
 # Kubernetes Kubectl Commands for Minikube
 
 ## Minikube Basics
- 
+` 
 minikube start               # Start Minikube cluster
 minikube stop                # Stop Minikube cluster
 minikube delete              # Delete Minikube cluster
@@ -12,19 +12,19 @@ minikube service list        # List all running services
 minikube addons list         # List available addons
 minikube addons enable <name>  # Enable an addon
 minikube addons disable <name> # Disable an addon
- 
+` 
 
 ## Kubectl Basic Commands
  
-kubectl version --short           # Get kubectl version
-kubectl cluster-info              # Get cluster information
-kubectl get nodes                 # List all nodes in the cluster
-kubectl get pods -A               # List all pods in all namespaces
-kubectl get services -A           # List all services in all namespaces
-kubectl get deployments -A        # List all deployments in all namespaces
-kubectl describe pod <pod-name>   # Get detailed information about a pod
-kubectl logs <pod-name>           # View logs of a specific pod
-kubectl exec -it <pod-name> -- /bin/sh   # Access a pod's shell
+-`kubectl version --short `          # Get kubectl version
+- `kubectl cluster-info  `            # Get cluster information
+- `kubectl get nodes  `               # List all nodes in the cluster
+`kubectl get pods -A `              # List all pods in all namespaces
+`kubectl get services -A `          # List all services in all namespaces
+`kubectl get deployments -A`        # List all deployments in all namespaces
+`kubectl describe pod <pod-name>`   # Get detailed information about a pod
+`kubectl logs <pod-name>  `         # View logs of a specific pod
+`kubectl exec -it <pod-name> -- /bin/sh`   # Access a pod's shell
  
 
 ## Managing Deployments
