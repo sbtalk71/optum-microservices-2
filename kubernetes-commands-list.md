@@ -1,6 +1,7 @@
  ## Kubernetes Kubectl Commands for Minikube
  *`kubectl` commands are applicable for any kubernetes cluster*
 
+
  #### Minikube Basics
  | Commands        |  What it does
  |-----------------|------------------------------------
@@ -28,7 +29,7 @@
 |`kubectl describe pod <pod-name> ` |  Get detailed information about a pod|
 |`kubectl logs <pod-name>   ` |         View logs of a specific pod|
 |`kubectl exec -it <pod-name> -- /bin/sh `|   Access a pod's shell|
- 
+
 
 #### Managing Deployments
 | Commands                                              | What it does                  | 
